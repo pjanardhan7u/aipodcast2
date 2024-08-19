@@ -2,7 +2,7 @@ import React from 'react'
 
 const Discover = () => {
   return (
-    <div className='text-white-1'>Discover</div>
+    <h1 className='text-20 font-bold text-white-1'>Descover</h1>
   )
 }
 
