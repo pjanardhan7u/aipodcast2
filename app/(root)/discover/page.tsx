@@ -3,7 +3,7 @@
 import EmptyState from '@/components/EmptyState'
 import LoaderSpinner from '@/components/LoaderSpinner'
 import PodcastCard from '@/components/PodcastCard'
-import Searchbar from '@/components/SearchBar'
+import Searchbar from '@/components/Searchbar'
 import { api } from '@/convex/_generated/api'
 import { useQuery } from 'convex/react'
 import React from 'react'
