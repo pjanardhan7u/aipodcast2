@@ -3,6 +3,7 @@
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useForm } from "react-hook-form"
 import { z } from "zod"
+import { voiceDetails } from "@/constants";
 import { Button } from "@/components/ui/button"
 import {
   Form,
@@ -29,20 +30,20 @@ import GeneratePodcast from "@/components/GeneratePodcast"
 import GenerateThumbnail from "@/components/GenerateThumbnail"
 import { Loader } from "lucide-react"
 import { Id } from "@/convex/_generated/dataModel"
-
-
-
-
-
-const voiceCategories = ['alloy', 'shimmer', 'nova', 'echo', 'fable', 'onyx'];
-
+import { useToast } from "@/components/ui/use-toast"
+import { useMutation } from "convex/react"
+import { api } from "@/convex/_generated/api"
+import { useRouter } from "next/navigation"
 
 const formSchema = z.object({
   podcastTitle: z.string().min(2),
   podcastDescription: z.string().min(2)
 })
 
-const CreatePodcast = () => {
+const CreatePodcast = () => 
+{
+
+  const router = useRouter()
 
   const [imagePrompt, setImagePrompt] = useState('')
   const [imageStorageId, setImageStorageId] = useState<Id<"_storage"> | null>(null)
@@ -57,7 +58,9 @@ const CreatePodcast = () => {
 
   const [isSubmitting, setIsSubmitting] = useState(false)
 
+  const { toast } = useToast()
 
+  const createPodcast = useMutation(api.podcasts.createPodcast)
 
 
   // 1. Define your form.
@@ -72,11 +75,42 @@ const CreatePodcast = () => {
 
  
   // 2. Define a submit handler.
-  function onSubmit(values: z.infer<typeof formSchema>) {
-    // Do something with the form values.
-    // ✅ This will be type-safe and validated.
-    console.log(values)
+  async function onSubmit(data: z.infer<typeof formSchema>) {
+    try {
+      setIsSubmitting(true);
+      if(!audioUrl || !imageUrl || !voiceType) {
+        toast({
+          title: 'Please generate audio and image',
+        })
+        setIsSubmitting(false);
+        throw new Error('Please generate audio and image')
+      }
+
+      const podcast = await createPodcast({
+        podcastTitle: data.podcastTitle,
+        podcastDescription: data.podcastDescription,
+        audioUrl,
+        imageUrl,
+        voiceType,
+        imagePrompt,
+        voicePrompt,
+        views: 0,
+        audioDuration,
+        audioStorageId: audioStorageId!,
+        imageStorageId: imageStorageId!,
+      })
+      toast({ title: 'Podcast created' })
+      setIsSubmitting(false);
+      router.push('/')
+    } catch (error) {
+      console.log(error);
+      toast({
+        title: 'Error',
+        variant: 'destructive',
+      })
+      setIsSubmitting(false);
   }
+}
 
   return (
     <section className='mt-10 flex flex-col'>
@@ -109,14 +143,18 @@ const CreatePodcast = () => {
               <SelectValue placeholder="Select AI Voice" className="placeholder:text-gray-1 " />
             </SelectTrigger>
             <SelectContent className="text-16 border-none bg-black-1 font-bold text-white-1 focus:ring-orange-1">
-              {voiceCategories.map((category) => (
-                    <SelectItem key={category} value={category} className="capitalize focus:bg-orange-1">
-                      {category}
+              {voiceDetails.map((voice) => (
+                    <SelectItem
+                      key={voice.id}
+                      value={voice.name}
+                      className="capitalize focus:bg-orange-1"
+                    >
+                      {voice.name}
                     </SelectItem>
-              ))}
+                  ))}
             </SelectContent>
               {voiceType && <audio 
-                             src={`/{voiceType}.mp3`}
+                             src={`/${voiceType}.mp3`}
                              autoPlay
                              className="hidden"
                               />}
@@ -141,12 +179,13 @@ const CreatePodcast = () => {
         
         <div className="flex flex-col pt-10">
           <GeneratePodcast  
-            setAudioStorageId={setAudioStorageId}
-            setAudio={setAudioUrl}
-            voiceType={voiceType!}
-            audio={audioUrl}
-            voicePrompt={voicePrompt}
-            setAudioDuration={setAudioDuration}
+           setAudioStorageId={setAudioStorageId}
+           setAudio={setAudioUrl}
+           voiceType={voiceType!}
+           audio={audioUrl}
+           voicePrompt={voicePrompt}
+           setVoicePrompt={setVoicePrompt}
+           setAudioDuration={setAudioDuration}
           />
 
           <GenerateThumbnail
@@ -183,11 +222,4 @@ const CreatePodcast = () => {
 
 
 
-
-
-
-
-
-
-
-export default CreatePodcast
+export default CreatePodcast;

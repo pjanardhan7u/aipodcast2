@@ -15,33 +15,49 @@ export const sidebarLinks = [
       label: "Create Podcast",
     },
   ];
-  
+
+
   export const voiceDetails = [
     {
       id: 1,
-      name: "alloy",
+      name: "Rachel",
     },
     {
       id: 2,
-      name: "echo",
+      name: "Bella",
     },
     {
       id: 3,
-      name: "fable",
+      name: "Domi",
     },
     {
       id: 4,
-      name: "onyx",
+      name: "Antoni",
     },
     {
       id: 5,
-      name: "nova",
+      name: "Elli",
     },
     {
       id: 6,
-      name: "shimmer",
+      name: "Adam",
     },
+    {
+      id: 7,
+      name: "Kamala",
+    },
+    {
+      id: 8,
+      name: "Jana",
+    },
+    {
+      id: 9,
+      name: "Raju",
+    },
+   
   ];
+  
+
   
   export const podcastData = [
     {
