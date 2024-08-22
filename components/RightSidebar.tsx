@@ -38,10 +38,7 @@ const RightSidebar = () => {
           </div>
         </Link>
       </SignedIn>
-      <section>
-        <Header headerTitle="Fans Like You" />
-        <Carousel fansLikeDetail={topPodcasters!}/>
-      </section>
+
       <section className="flex flex-col gap-8 pt-12">
         <Header headerTitle="Top Podcastrs" />
         <div className="flex flex-col gap-6">
