@@ -24,37 +24,20 @@ export const sidebarLinks = [
     },
     {
       id: 2,
-      name: "Bella",
-    },
-    {
-      id: 3,
       name: "Domi",
     },
     {
-      id: 4,
+      id: 3,
       name: "Antoni",
     },
     {
-      id: 5,
+      id: 4,
       name: "Elli",
     },
     {
-      id: 6,
+      id: 5,
       name: "Adam",
     },
-    {
-      id: 7,
-      name: "Kamala",
-    },
-    {
-      id: 8,
-      name: "Jana",
-    },
-    {
-      id: 9,
-      name: "Raju",
-    },
-   
   ];
   
 

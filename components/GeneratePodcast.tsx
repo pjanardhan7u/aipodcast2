@@ -20,7 +20,6 @@ const useGeneratePodcast = ({
   const generateUploadUrl = useMutation(api.files.generateUploadUrl);
   const { startUpload } = useUploadFiles(generateUploadUrl)
 
-  // const getPodcastAudio = useAction(api.openai.generateAudioAction)
   const getPodcastAudio = useAction(api.elevenlabs.generateAudioAction);
 
   const getAudioUrl = useMutation(api.podcasts.getUrl);

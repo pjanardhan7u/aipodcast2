@@ -14,7 +14,6 @@ import type {
   FilterApi,
   FunctionReference,
 } from "convex/server";
-import type * as deepai from "../deepai.js";
 import type * as elevenlabs from "../elevenlabs.js";
 import type * as files from "../files.js";
 import type * as http from "../http.js";
@@ -32,7 +31,6 @@ import type * as users from "../users.js";
  * ```
  */
 declare const fullApi: ApiFromModules<{
-  deepai: typeof deepai;
   elevenlabs: typeof elevenlabs;
   files: typeof files;
   http: typeof http;
