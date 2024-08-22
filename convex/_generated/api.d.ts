@@ -19,7 +19,6 @@ import type * as files from "../files.js";
 import type * as http from "../http.js";
 import type * as podcasts from "../podcasts.js";
 import type * as tasks from "../tasks.js";
-import type * as unreal from "../unreal.js";
 import type * as users from "../users.js";
 
 /**
@@ -36,7 +35,6 @@ declare const fullApi: ApiFromModules<{
   http: typeof http;
   podcasts: typeof podcasts;
   tasks: typeof tasks;
-  unreal: typeof unreal;
   users: typeof users;
 }>;
 export declare const api: FilterApi<
