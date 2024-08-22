@@ -171,6 +171,7 @@ export const getPodcastBySearch = query({
 
 // this mutation will update the views of the podcast.
 export const updatePodcastViews = mutation({
+  
   args: {
     podcastId: v.id("podcasts"),
   },

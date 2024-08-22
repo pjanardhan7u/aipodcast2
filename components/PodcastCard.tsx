@@ -2,18 +2,28 @@ import { PodcastCardProps } from '@/types'
 import Image from 'next/image'
 import { useRouter } from 'next/navigation'
 import React from 'react'
+import { useMutation } from 'convex/react';
+import { api } from "@/convex/_generated/api";
+
 
 const PodcastCard = ({
   imgUrl, title, description, podcastId
 }: PodcastCardProps) => {
   const router = useRouter()
+  const updateViews = useMutation(api.podcasts.updatePodcastViews);
 
-  const handleViews = () => {
-    // increase views
+  const handleViews = async () => {
+    try {
+      // Increment the view count
+      await updateViews({ podcastId });
 
-    router.push(`/podcasts/${podcastId}`, {
-      scroll: true
-    })
+      // Navigate to the podcast detail page
+      router.push(`/podcasts/${podcastId}`, {
+        scroll: true
+      });
+    } catch (error) {
+      console.error('Failed to update view count:', error);
+    }
   }
 
   return (
