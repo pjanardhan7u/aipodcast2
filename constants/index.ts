@@ -100,3 +100,35 @@ export const sidebarLinks = [
         "https://lovely-flamingo-139.convex.cloud/api/storage/221ee4bd-435f-42c3-8e98-4a001e0d806e",
     },
   ];
+
+  export const topics = [
+    {
+      id: 1,
+      name: "Tech",
+    },
+    {
+      id: 2,
+      name: "Science",
+    },
+    {
+      id: 3,
+      name: "Sports",
+    },
+    {
+      id: 4,
+      name: "Comedy",
+    },
+    {
+      id: 5,
+      name: "Education",
+    },
+    {
+      id: 9,
+      name: "Music",
+    },
+    {
+      id: 10,
+      name: "History",
+    },
+
+  ];
